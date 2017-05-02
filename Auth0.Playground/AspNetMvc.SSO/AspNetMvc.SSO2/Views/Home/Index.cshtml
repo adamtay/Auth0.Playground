@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<script src="https://cdn.auth0.com/js/lock/10.15/lock.min.js"></script>
+<script src="https://cdn.auth0.com/w2/auth0-7.6.1.min.js"></script>
+<script>
+    var lock = new Auth0Lock('@ViewBag.Auth0ClientId', '@ViewBag.Auth0Domain', {
+        auth: {
+            redirectUrl: '@ViewBag.Auth0CallbackUrl',
+            responseType: 'code',
+            params: {
+                scope: 'openid email'
+            },
+            sso: true
+        },
+        rememberLastLogin: false
+    });
+
+    var auth0 = new Auth0({
+        domain: '@ViewBag.Auth0Domain',
+        clientID: '@ViewBag.Auth0ClientId',
+        callbackURL:  '@ViewBag.Auth0CallbackUrl',
+        responseType: 'token'
+    });
+
+    auth0.getSSOData(function (err, ssoData) {
+        if (!err && ssoData && ssoData.sso) {
+            auth0.login({
+                connection: ssoData.lastUsedConnection.name
+            });
+        } else {
+            lock.show();
+        }
+    });
+</script>
