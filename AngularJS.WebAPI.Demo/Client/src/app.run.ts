@@ -3,8 +3,10 @@ angular
   .run(run);
 
 /** @ngInject */
-function run(authenticationService: Services.IAuthenticationService, lock: any, $transitions: any, $state: any) {
+function run(authenticationService: Services.IAuthenticationService, lock: any, authManager: any, $transitions: any, $state: any) {
 	authenticationService.registerAuthenticationListener();
+	authManager.checkAuthOnRefresh();
+
 	lock.interceptHash();
 
 	$transitions.onStart({ to: 'app' }, ($transitions: any) => {
