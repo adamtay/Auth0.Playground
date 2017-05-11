@@ -11,7 +11,7 @@
       "check-lowercase"
     ],
     "curly": true,
-    "eofline": true,
+    "eofline": false,
     "forin": true,
     "indent": [true, 2],
     "interface-name": true,
@@ -41,7 +41,7 @@
     "no-string-literal": true,
     "no-switch-case-fall-through": true,
     "trailing-comma": true,
-    "no-trailing-whitespace": true,
+    "no-trailing-whitespace": false,
     "no-unused-expression": true,
     "no-use-before-declare": true,
     "no-var-requires": true,
